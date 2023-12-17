@@ -1,10 +1,10 @@
 import { readFileSync } from "fs";
-import { Color, Configuration, GameRecord, GameSet } from "./types";
+import { Color, Configuration, GameRecord, CubeSet } from "./types";
 
 export function extractGameResults(results: string): GameRecord {
   return results.split(";").map((set) => {
     const colorValuePairs = set.trim().split(",");
-    const setObject = colorValuePairs.reduce<GameSet>((acc, pairs) => {
+    const setObject = colorValuePairs.reduce<CubeSet>((acc, pairs) => {
       const [value, color] = pairs.trim().split(" ");
       acc[color as Color] = parseInt(value);
       return acc;
@@ -53,14 +53,15 @@ export function sumOfPossibleGameIds(
   }, 0);
 }
 
-const CONFIGURATION: Configuration = { red: 12, green: 13, blue: 14 };
-const INPUT_PATH = "2/input.txt";
+if (require.main === module) {
+  const CONFIGURATION: Configuration = { red: 12, green: 13, blue: 14 };
+  const INPUT_PATH = "2/input.txt";
 
-const gameRecords = loadGameRecords(INPUT_PATH);
-
-console.log(
-  `the sum of possible game ids with this configuration is ${sumOfPossibleGameIds(
-    gameRecords,
-    CONFIGURATION
-  )}`
-);
+  const gameRecords = loadGameRecords(INPUT_PATH);
+  console.log(
+    `the sum of possible game ids with this configuration is ${sumOfPossibleGameIds(
+      gameRecords,
+      CONFIGURATION
+    )}`
+  );
+}
