@@ -39,7 +39,7 @@ function lowestLocationNumber(input: string) {
   return Math.min(...Object.values(seedToLocation));
 }
 
-const input = readFileSync("5/tests/test_input.txt", {
+const input = readFileSync("5/input.txt", {
   encoding: "utf-8",
   flag: "r",
 });
